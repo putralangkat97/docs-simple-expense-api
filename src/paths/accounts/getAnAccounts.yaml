@@ -19,7 +19,7 @@ get:
           schema:
             $ref: ../responses/schemas/abstract_get_account.yaml
           example:
-            $ref: ../responses/example/anAccountExample.yaml
+            $ref: ../responses/example/getAccountExample.yaml
   tags:
     - Account
 
