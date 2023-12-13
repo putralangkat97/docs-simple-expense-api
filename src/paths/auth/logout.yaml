@@ -1,0 +1,17 @@
+get:
+  summary: Logout
+  description: Logout from application
+  operationId: logout
+  security:
+    - apiKey:
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ./responses/schemas/abstract_logout.yaml
+          example:
+            $ref: ./responses/examples/logoutExample.yaml
+  tags:
+    - Authentication

@@ -1,0 +1,28 @@
+{
+    "name": "expense-api",
+    "version": "1.5.0",
+    "description": "Open API documentation for Expense Application",
+    "main": "public/index.html",
+    "scripts": {
+        "test": "npm run build",
+        "dev": "npm run build:html",
+        "lint": "./node_modules/.bin/redocly lint --config=.redocly.yaml --max-problems=3",
+        "lint_win": "node_modules\\.bin\\redocly.cmd lint --config=.redocly.yaml",
+        "build": "npm run build:postman && npm run build:html",
+        "build:postman": "./node_modules/.bin/redocly bundle ./src/openapi.yaml -0 ./public/postman.yaml --ext yaml",
+        "build:html": "./node_modules/.bin/redocly build-docs -o ./public/index.html"
+    },
+    "keywords": [
+        "openapi",
+        "expense-api",
+        "expense"
+    ],
+    "author": "pucukpisang97@gmail.com",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "@commitlint/cli": "^18.4.3",
+        "@commitlint/config-conventional": "18.4.3",
+        "@redocly/cli": "1.5.0",
+        "husky":"^8.0.3"
+    }
+}

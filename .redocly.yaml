@@ -1,0 +1,39 @@
+extends:
+  - recommended
+
+apis:
+  main:
+    root: ./src/openapi.yaml
+    rules:
+      tag-description: off
+      operation-operationId: off
+      no-unresolved-refs: error
+      operation-2xx-response: error
+      operation-singular-tag: error
+      no-unused-components: error
+      no-ambiguous-paths: error
+theme:
+  openapi:
+    requiredPropsFirst: true
+    generateCodeSamples:
+      languages:
+        - lang: curl
+        - lang: Go
+        - lang: Java
+        - lang: JavaScript
+        - lang: PHP
+    theme:
+      logo:
+        gutter: 2em
+      colors:
+        primary:
+          main: '#EE5E02'
+      fab:
+        color: '#EE5E02'
+      overrides:
+        DownloadButton:
+          custom: 'border-radius: 0.25em'
+      sidebar:
+        backgroundColor: '#fafafa'
+      rightPanel:
+        backgroundColor: '#222'

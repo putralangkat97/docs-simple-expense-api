@@ -1,0 +1,41 @@
+openapi: 3.0.0
+
+info:
+  version: 1.5.0
+  title: EXPENSE API
+  contact:
+    name: Anggit Utomo
+    url: https://anggitutomo.com
+  license:
+    name: Personal
+    url: https://anggitutomo.com
+  description: |
+    A simple api to tract your daily expense.
+
+    Every user can:
+    1. Create multiple account
+    2. Create a transaction with source account
+
+servers:
+  - url: https://api-expense-app.anggitutomo.com/api
+    description: Production Environment
+
+tags:
+  - name: Authentication
+    description: Application authentication
+
+paths:
+  /register:
+    $ref: './paths/auth/register.yaml'
+  /login:
+    $ref: './paths/auth/login.yaml'
+  /logout:
+    $ref: './paths/auth/logout.yaml'
+
+components:
+  securitySchemes:
+    apiKey:
+      description: Bearer token after login 
+      type: http
+      scheme: bearer
+      in: header

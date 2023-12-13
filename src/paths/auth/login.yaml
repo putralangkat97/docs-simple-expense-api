@@ -1,0 +1,33 @@
+post:
+  summary: Login
+  description: Login to application
+  operationId: login
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              description: a valid email address
+              example: 'anggit@anggitutomo.com'
+            password:
+              type: string
+              description: a valid password with min. chars is 8
+              example: 'password12345'
+          required:
+            - email
+            - password
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ./responses/schemas/abstract_login.yaml
+          example:
+            $ref: ./responses/examples/loginExample.yaml
+  tags:
+    - Authentication

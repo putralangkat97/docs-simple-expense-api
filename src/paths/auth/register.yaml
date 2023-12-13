@@ -1,0 +1,43 @@
+post:
+  summary: Create an Account
+  description: register and create a new user
+  operationId: register
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: user full name
+              example: 'Anggit Utomo'
+            email:
+              type: string
+              description: a valid email address
+              example: 'anggit@anggitutomo.com'
+            password:
+              type: string
+              description: a valid password with min. chars is 8
+              example: 'password12345'
+            password_confirmation:
+              type: string
+              description: confirm password
+              example: 'password12345'
+          required:
+            - name
+            - email
+            - password
+            - password_confirmation
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ./responses/schemas/abstract_register.yaml
+          example:
+            $ref: ./responses/examples/registerExample.yaml
+  tags:
+    - Authentication

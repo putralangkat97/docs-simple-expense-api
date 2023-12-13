@@ -1,0 +1,26 @@
+type: object
+properties:
+  message:
+    type: string
+    description: The response message.
+  code:
+    type: integer
+    description: The HTTP response code.
+  results:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The user full name
+      email:
+        type: string
+        description: The user email
+      updated_at:
+        type: string
+        description: The user update date
+      created_at:
+        type: string
+        description: The user creation date
+      id:
+        type: integer
+        description: The user id
