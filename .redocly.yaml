@@ -27,13 +27,13 @@ theme:
         gutter: 2em
       colors:
         primary:
-          main: '#EE5E02'
+          main: '#0D9488'
       fab:
-        color: '#EE5E02'
+        color: '#0D9488'
       overrides:
         DownloadButton:
           custom: 'border-radius: 0.25em'
       sidebar:
-        backgroundColor: '#fafafa'
+        backgroundColor: '#f3f4f6'
       rightPanel:
-        backgroundColor: '#222'
+        backgroundColor: '#111827'
