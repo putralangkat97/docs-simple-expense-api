@@ -1,0 +1,23 @@
+---
+  - id: 1
+    user_id:
+      id: 3
+      name: Geo Bahringer
+      email: rosanna.denesik@example.org
+      email_verified_at: 2023-12-05T14:14:21.000000Z
+      created_at: 2023-12-05T14:14:21.000000Z
+      updated_at: 2023-12-05T14:14:21.000000Z
+    name: eveniet
+    description: Cum sit saepe eos similique.
+    balance: 444901.400
+  - id: 2
+    user_id:
+      id: 3
+      name: Geo Ceos Sit
+      email: rosanna.denesik@example.org
+      email_verified_at: 2023-12-05T14:14:21.000000Z
+      created_at: 2023-12-05T14:14:21.000000Z
+      updated_at: 2023-12-05T14:14:21.000000Z
+    name: eveniet
+    description: Cum sit saepe eos similique.
+    balance: 599.459

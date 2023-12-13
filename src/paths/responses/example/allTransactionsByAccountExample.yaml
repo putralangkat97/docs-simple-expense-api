@@ -1,0 +1,16 @@
+id: 1
+name: eveniet
+description: Cum sit saepe eos similique.
+balance: 444901.400
+transactions:
+  - id: 13
+    transaction_name: test 1
+    date: "2023-12-05 12:56:00"
+    type: out
+    remarks: test remarks
+    amount: 30000.000
+    account:
+      id: 11
+      name: Account 2
+      description: lorem ipsum dolor
+      balance: 860000.000

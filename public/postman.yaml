@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  version: 1.5.0
+  title: EXPENSE API
+  contact:
+    name: Anggit Utomo
+    url: https://anggitutomo.com
+  license:
+    name: Personal
+    url: https://anggitutomo.com
+  description: |
+    A simple api to tract your daily expense.
+
+    Every user can:
+    1. Create multiple account
+    2. Create a transaction with source account
+servers:
+  - url: https://api-expense-app.anggitutomo.com/api
+    description: Production Environment
+tags:
+  - name: Authentication
+    description: Application authentication
+paths:
+  /register:
+    post:
+      summary: Create an Account
+      description: register and create a new user
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: user full name
+                  example: Anggit Utomo
+                email:
+                  type: string
+                  description: a valid email address
+                  example: anggit@anggitutomo.com
+                password:
+                  type: string
+                  description: a valid password with min. chars is 8
+                  example: password12345
+                password_confirmation:
+                  type: string
+                  description: confirm password
+                  example: password12345
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_register'
+              example:
+                message: User created successfully
+                code: 201
+                results:
+                  name: Anggit Utomo
+                  email: anggit@anggitutomo.com
+                  updated_at: '2023-12-05T15:03:29.000000Z'
+                  created_at: '2023-12-05T15:03:29.000000Z'
+                  id: 1
+      tags:
+        - Authentication
+  /login:
+    post:
+      summary: Login
+      description: Login to application
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: a valid email address
+                  example: anggit@anggitutomo.com
+                password:
+                  type: string
+                  description: a valid password with min. chars is 8
+                  example: password12345
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_login'
+              example:
+                message: Logged in successfully
+                code: 200
+                results:
+                  user:
+                    id: 1
+                    name: Anggit Utomo
+                    email: anggit@anggitutomo.com
+                    email_verified_at: null
+                    created_at: '2023-12-05T15:03:29.000000Z'
+                    updated_at: '2023-12-05T15:03:29.000000Z'
+                  token_type: Bearer
+                  token: 1|OGik7vKx5i2EHTNSeM3QvYl81ot5BFozfXrx46okec0408db
+      tags:
+        - Authentication
+  /logout:
+    get:
+      summary: Logout
+      description: Logout from application
+      operationId: logout
+      security:
+        - apiKey: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_logout'
+              example:
+                message: logout success.
+      tags:
+        - Authentication
+components:
+  securitySchemes:
+    apiKey:
+      description: Bearer token after login
+      type: http
+      scheme: bearer
+      in: header
+  schemas:
+    abstract_register:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The user full name
+            email:
+              type: string
+              description: The user email
+            updated_at:
+              type: string
+              description: The user update date
+            created_at:
+              type: string
+              description: The user creation date
+            id:
+              type: integer
+              description: The user id
+    abstract_login:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            user:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: The user id
+                name:
+                  type: string
+                  description: The user full name
+                email:
+                  type: string
+                  description: The user email
+                created_at:
+                  type: string
+                  description: The user creation date
+                updated_at:
+                  type: string
+                  description: The user update date
+            token_type:
+              type: string
+              description: Token type
+            token:
+              type: string
+              description: Token string
+    abstract_logout:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.

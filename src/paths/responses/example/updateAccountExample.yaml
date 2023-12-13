@@ -1,0 +1,10 @@
+message: account updated successfully
+code: 201
+results:
+  name: Bank Account
+  description: lorem ipsum dolor
+  amount: 780000
+  user_id: 11
+  updated_at: '2023-12-05T15:09:15.000000Z'
+  created_at: '2023-12-05T15:09:15.000000Z'
+  id: 12

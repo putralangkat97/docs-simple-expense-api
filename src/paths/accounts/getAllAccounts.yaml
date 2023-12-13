@@ -1,0 +1,58 @@
+get:
+  summary: Get all accounts
+  description: get all accounts filter based on user logged in.
+  operationId: all account
+  security:
+    - apiKey:
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/schemas/abstract_all_accounts.yaml
+          example:
+            $ref: ../responses/example/allAccountsExample.yaml
+  tags:
+    - Account
+
+post:
+  summary: Create an accounts
+  description: create an account filter based on user logged in.
+  operationId: create account
+  security:
+    - apiKey:
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: account name min 2 chars.
+              example: 'Bank Account'
+            amount:
+              type: number
+              description: amount/balance of account.
+              example: 500000
+            description:
+              type: string
+              description: description of account
+              example: 'my saving account'
+          required:
+            - name
+            - amount
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/schemas/abstract_create_account.yaml
+          example:
+            $ref: ../responses/example/createAccountExample.yaml
+  tags:
+    - Account
+

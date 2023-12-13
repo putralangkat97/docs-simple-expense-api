@@ -23,6 +23,7 @@ servers:
 tags:
   - name: Authentication
     description: Application authentication
+  - name: Account
 
 paths:
   /register:
@@ -31,6 +32,13 @@ paths:
     $ref: './paths/auth/login.yaml'
   /logout:
     $ref: './paths/auth/logout.yaml'
+
+  /account:
+    $ref: './paths/accounts/getAllAccounts.yaml'
+  /account/{accountId}:
+    $ref: './paths/accounts/getAnAccounts.yaml'
+  /account/{accountId}/transaction:
+    $ref: './paths/accounts/getAllTransactionsByAccount.yaml'
 
 components:
   securitySchemes:

@@ -1,0 +1,97 @@
+get:
+  summary: Get account
+  description: get an accounts filter based on user logged in.
+  operationId: get an account
+  security:
+    - apiKey:
+  parameters:
+    - name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID of the account
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/schemas/abstract_get_account.yaml
+          example:
+            $ref: ../responses/example/anAccountExample.yaml
+  tags:
+    - Account
+
+post:
+  summary: Update account
+  description: update an account filter based on user logged in.
+  operationId: update account
+  security:
+    - apiKey:
+  parameters:
+    - name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID of the account
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: account name min 2 chars.
+              example: 'Bank Account'
+            amount:
+              type: number
+              description: amount/balance of account.
+              example: 500000
+            description:
+              type: string
+              description: description of account
+              example: 'my saving account'
+          required:
+            - name
+            - amount
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/schemas/abstract_create_account.yaml
+          example:
+            $ref: ../responses/example/createAccountExample.yaml
+  tags:
+    - Account
+
+delete:
+  summary: Delete account
+  description: delete an accounts filter based on user logged in.
+  operationId: delete account
+  security:
+    - apiKey:
+  parameters:
+    - name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID of the account
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/schemas/abstract_delete_account.yaml
+          example:
+            $ref: ../responses/example/deleteAccountExample.yaml
+  tags:
+    - Account
+

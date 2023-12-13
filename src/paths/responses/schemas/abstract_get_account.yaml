@@ -1,0 +1,19 @@
+type: object
+properties:
+  message:
+    type: string
+    description: The response message.
+  code:
+    type: integer
+    description: The HTTP response code.
+  results:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      balance:
+        type: number

@@ -1,0 +1,24 @@
+get:
+  summary: Get all transactions by accounts
+  description: get all transaction filter based on account.
+  operationId: all transaction by account
+  security:
+    - apiKey:
+  parameters:
+    - name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID of the account
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/schemas/abstract_all_transactions_by_account.yaml
+          example:
+            $ref: ../responses/example/allTransactionsByAccountExample.yaml
+  tags:
+    - Account
