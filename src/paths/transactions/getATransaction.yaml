@@ -1,0 +1,112 @@
+get:
+  summary: Get a transaction
+  description: get a transaction filter based on user logged in.
+  operationId: get a transaction
+  security:
+    - apiKey:
+  parameters:
+    - name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: transaction ID
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/transactions/schemas/abstract_get_transaction.yaml
+          example:
+            $ref: ../responses/transactions/examples/getTransactionExample.yaml
+  tags:
+    - Transaction
+
+post:
+  summary: Update transaction
+  description: update a transaction filter based on user logged in.
+  operationId: update transaction
+  security:
+    - apiKey:
+  parameters:
+    - name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: transaction ID
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            transaction_name:
+              type: string
+              description: transaction name min 2 chars.
+              example: 'Bank transaction'
+            date:
+              type: string
+              description: transaction date.
+              example: '2023-12-04 34:00:00'
+            amount:
+              type: number
+              description: transaction amount.
+              example: 500000
+            remarks:
+              type: string
+              description: transaction description
+              example: 'my saving transaction'
+            type:
+              type: string
+              description: only accept these value `in` or `out`
+              example: 'out'
+            account_id:
+              type: integer
+              description: account source ID
+              example: 11
+          required:
+            - transaction_name
+            - date
+            - amount
+            - type
+            - account_id
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/transactions/schemas/abstract_update_transaction.yaml
+          example:
+            $ref: ../responses/transactions/examples/updateTransactionExample.yaml
+  tags:
+    - Transaction
+
+delete:
+  summary: Delete transaction
+  description: delete a transaction filter based on user logged in.
+  operationId: delete transaction
+  security:
+    - apiKey:
+  parameters:
+    - name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: transaction ID
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/transactions/schemas/abstract_delete_transaction.yaml
+          example:
+            $ref: ../responses/transactions/examples/deleteAccountExample.yaml
+  tags:
+    - Transaction
+

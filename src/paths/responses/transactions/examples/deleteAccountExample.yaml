@@ -1,0 +1,13 @@
+message: Transaction deleted
+code: 200
+results:
+  id: 13
+  user_id: 11
+  account_id: 11
+  transaction_name: test 1
+  date: '2023-12-05 12:56:00'
+  remarks: test remarks
+  amount: 10000.000
+  type: out
+  created_at: '2023-12-12T06:29:41.000000Z'
+  updated_at: '2023-12-18T11:05:32.000000Z'

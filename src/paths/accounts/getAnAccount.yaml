@@ -1,6 +1,6 @@
 get:
   summary: Get account
-  description: get an accounts filter based on user logged in.
+  description: get an account filter based on user logged in.
   operationId: get an account
   security:
     - apiKey:
@@ -10,16 +10,16 @@ get:
       required: true
       schema:
         type: string
-      description: ID of the account
+      description: account ID
   responses:
     200:
       description: OK
       content:
         application/json:
           schema:
-            $ref: ../responses/schemas/abstract_get_account.yaml
+            $ref: ../responses/accounts/schemas/abstract_get_account.yaml
           example:
-            $ref: ../responses/example/getAccountExample.yaml
+            $ref: ../responses/accounts/examples/getAccountExample.yaml
   tags:
     - Account
 
@@ -35,7 +35,7 @@ post:
       required: true
       schema:
         type: string
-      description: ID of the account
+      description: account ID
   requestBody:
     required: true
     content:
@@ -49,7 +49,7 @@ post:
               example: 'Bank Account'
             amount:
               type: number
-              description: amount/balance of account.
+              description: account amount/balance.
               example: 500000
             description:
               type: string
@@ -64,9 +64,9 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../responses/schemas/abstract_create_account.yaml
+            $ref: ../responses/accounts/schemas/abstract_update_account.yaml
           example:
-            $ref: ../responses/example/createAccountExample.yaml
+            $ref: ../responses/accounts/examples/updateAccountExample.yaml
   tags:
     - Account
 
@@ -82,16 +82,16 @@ delete:
       required: true
       schema:
         type: string
-      description: ID of the account
+      description: account ID
   responses:
     200:
       description: OK
       content:
         application/json:
           schema:
-            $ref: ../responses/schemas/abstract_delete_account.yaml
+            $ref: ../responses/accounts/schemas/abstract_delete_account.yaml
           example:
-            $ref: ../responses/example/deleteAccountExample.yaml
+            $ref: ../responses/accounts/examples/deleteAccountExample.yaml
   tags:
     - Account
 

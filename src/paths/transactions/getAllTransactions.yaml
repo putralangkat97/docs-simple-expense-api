@@ -1,0 +1,73 @@
+get:
+  summary: Get all transactions
+  description: get all transactions filter based on user logged in.
+  operationId: all transactions
+  security:
+    - apiKey:
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/transactions/schemas/abstract_all_transactions.yaml
+          example:
+            $ref: ../responses/transactions/examples/allTransactionsExample.yaml
+  tags:
+    - Transaction
+
+post:
+  summary: Create a transaction
+  description: create a transaction filter based on user logged in.
+  operationId: create transaction
+  security:
+    - apiKey:
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            transaction_name:
+              type: string
+              description: transaction name min 2 chars.
+              example: 'Bank transaction'
+            date:
+              type: string
+              description: transaction date.
+              example: '2023-12-04 34:00:00'
+            amount:
+              type: number
+              description: transaction amount.
+              example: 500000
+            remarks:
+              type: string
+              description: transaction description
+              example: 'my saving transaction'
+            type:
+              type: string
+              description: only accept these value `in` or `out`
+              example: 'out'
+            account_id:
+              type: integer
+              description: account source ID
+              example: 11
+          required:
+            - transaction_name
+            - date
+            - amount
+            - type
+            - account_id
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/transactions/schemas/abstract_create_transaction.yaml
+          example:
+            $ref: ../responses/transactions/examples/createTransactionExample.yaml
+  tags:
+    - Transaction
+

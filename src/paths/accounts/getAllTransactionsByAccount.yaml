@@ -1,5 +1,5 @@
 get:
-  summary: Get all transactions by accounts
+  summary: Get all transactions by account
   description: get all transaction filter based on account.
   operationId: all transaction by account
   security:
@@ -10,15 +10,15 @@ get:
       required: true
       schema:
         type: string
-      description: ID of the account
+      description: account ID
   responses:
     200:
       description: OK
       content:
         application/json:
           schema:
-            $ref: ../responses/schemas/abstract_all_transactions_by_account.yaml
+            $ref: ../responses/accounts/schemas/abstract_all_transactions_by_account.yaml
           example:
-            $ref: ../responses/example/allTransactionsByAccountExample.yaml
+            $ref: ../responses/accounts/examples/allTransactionsByAccountExample.yaml
   tags:
     - Account

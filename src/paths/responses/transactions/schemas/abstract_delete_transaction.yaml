@@ -1,0 +1,31 @@
+type: object
+properties:
+  message:
+    type: string
+    description: The response message.
+  code:
+    type: integer
+    description: The HTTP response code.
+  results:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      account_id:
+        type: integer
+      transaction_name:
+        type: string
+      date:
+        type: string
+      remarks:
+        type: string
+      amount:
+        type: number
+      type:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string

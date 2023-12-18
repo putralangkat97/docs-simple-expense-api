@@ -20,10 +20,12 @@ servers:
 tags:
   - name: Authentication
     description: Application authentication
+  - name: Account
+  - name: Transaction
 paths:
   /register:
     post:
-      summary: Create an Account
+      summary: Register
       description: register and create a new user
       operationId: register
       requestBody:
@@ -135,6 +137,501 @@ paths:
                 message: logout success.
       tags:
         - Authentication
+  /account:
+    get:
+      summary: Get all accounts
+      description: get all accounts filter based on user logged in.
+      operationId: all accounts
+      security:
+        - apiKey: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_all_accounts'
+              example:
+                - id: 1
+                  user_id:
+                    id: 3
+                    name: Geo Bahringer
+                    email: rosanna.denesik@example.org
+                    email_verified_at: '2023-12-05T14:14:21.000000Z'
+                    created_at: '2023-12-05T14:14:21.000000Z'
+                    updated_at: '2023-12-05T14:14:21.000000Z'
+                  name: eveniet
+                  description: Cum sit saepe eos similique.
+                  balance: 444901.4
+                - id: 2
+                  user_id:
+                    id: 3
+                    name: Geo Ceos Sit
+                    email: rosanna.denesik@example.org
+                    email_verified_at: '2023-12-05T14:14:21.000000Z'
+                    created_at: '2023-12-05T14:14:21.000000Z'
+                    updated_at: '2023-12-05T14:14:21.000000Z'
+                  name: eveniet
+                  description: Cum sit saepe eos similique.
+                  balance: 599.459
+      tags:
+        - Account
+    post:
+      summary: Create account
+      description: create an account filter based on user logged in.
+      operationId: create account
+      security:
+        - apiKey: null
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: account name min 2 chars.
+                  example: Bank Account
+                amount:
+                  type: number
+                  description: account amount/balance.
+                  example: 500000
+                description:
+                  type: string
+                  description: account description
+                  example: my saving account
+              required:
+                - name
+                - amount
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_create_account'
+              example:
+                message: account created successfully
+                code: 201
+                results:
+                  name: Bank Account
+                  description: lorem ipsum dolor
+                  amount: 780000
+                  user_id: 11
+                  updated_at: '2023-12-05T15:09:15.000000Z'
+                  created_at: '2023-12-05T15:09:15.000000Z'
+                  id: 12
+      tags:
+        - Account
+  /account/{accountId}:
+    get:
+      summary: Get account
+      description: get an account filter based on user logged in.
+      operationId: get an account
+      security:
+        - apiKey: null
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: account ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_get_account'
+              example:
+                id: 1
+                name: eveniet
+                description: Cum sit saepe eos similique.
+                balance: 444901.4
+      tags:
+        - Account
+    post:
+      summary: Update account
+      description: update an account filter based on user logged in.
+      operationId: update account
+      security:
+        - apiKey: null
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: account ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: account name min 2 chars.
+                  example: Bank Account
+                amount:
+                  type: number
+                  description: account amount/balance.
+                  example: 500000
+                description:
+                  type: string
+                  description: description of account
+                  example: my saving account
+              required:
+                - name
+                - amount
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_update_account'
+              example:
+                message: account updated successfully
+                code: 201
+                results:
+                  name: Bank Account
+                  description: lorem ipsum dolor
+                  amount: 780000
+                  user_id: 11
+                  updated_at: '2023-12-05T15:09:15.000000Z'
+                  created_at: '2023-12-05T15:09:15.000000Z'
+                  id: 12
+      tags:
+        - Account
+    delete:
+      summary: Delete account
+      description: delete an accounts filter based on user logged in.
+      operationId: delete account
+      security:
+        - apiKey: null
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: account ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_delete_account'
+              example:
+                message: Account deleted
+                code: 200
+                results:
+                  id: 12
+                  user_id: 11
+                  name: Account 2
+                  description: lorem ipsum dolor
+                  amount: 780000
+                  updated_at: '2023-12-05T15:09:15.000000Z'
+                  created_at: '2023-12-05T15:09:15.000000Z'
+      tags:
+        - Account
+  /account/{accountId}/transaction:
+    get:
+      summary: Get all transactions by account
+      description: get all transaction filter based on account.
+      operationId: all transaction by account
+      security:
+        - apiKey: null
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: account ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_all_transactions_by_account'
+              example:
+                id: 1
+                name: eveniet
+                description: Cum sit saepe eos similique.
+                balance: 444901.4
+                transactions:
+                  - id: 13
+                    transaction_name: test 1
+                    date: '2023-12-05 12:56:00'
+                    type: out
+                    remarks: test remarks
+                    amount: 30000
+                    account:
+                      id: 11
+                      name: Account 2
+                      description: lorem ipsum dolor
+                      balance: 860000
+      tags:
+        - Account
+  /transaction:
+    get:
+      summary: Get all transactions
+      description: get all transactions filter based on user logged in.
+      operationId: all transactions
+      security:
+        - apiKey: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_all_transactions'
+              example:
+                - id: 1
+                  transaction_name: Transaction 1
+                  date: '2023-12-12 23:56:32'
+                  type: out
+                  remarks: dinner
+                  amount: 345.763
+                  account:
+                    id: 3
+                    name: Account 2
+                    description: lorem ipsum dolor
+                    balance: 5499.344
+                - id: 2
+                  transaction_name: Transaction 2
+                  date: '2023-12-12 23:59:32'
+                  type: in
+                  remarks: transfer from friend
+                  amount: 599.763
+                  account:
+                    id: 3
+                    name: Account 2
+                    description: lorem ipsum dolor
+                    balance: 5499.344
+      tags:
+        - Transaction
+    post:
+      summary: Create a transaction
+      description: create a transaction filter based on user logged in.
+      operationId: create transaction
+      security:
+        - apiKey: null
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_name:
+                  type: string
+                  description: transaction name min 2 chars.
+                  example: Bank transaction
+                date:
+                  type: string
+                  description: transaction date.
+                  example: '2023-12-04 34:00:00'
+                amount:
+                  type: number
+                  description: transaction amount.
+                  example: 500000
+                remarks:
+                  type: string
+                  description: transaction description
+                  example: my saving transaction
+                type:
+                  type: string
+                  description: only accept these value `in` or `out`
+                  example: out
+                account_id:
+                  type: integer
+                  description: account source ID
+                  example: 11
+              required:
+                - transaction_name
+                - date
+                - amount
+                - type
+                - account_id
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_create_transaction'
+              example:
+                message: transaction created successfully
+                code: 201
+                results:
+                  transaction_name: Beras
+                  date: '2023-12-11 19:55:00'
+                  type: out
+                  remarks: beras 5kg
+                  account_id: 11
+                  user_id: 11
+                  amount: 20000
+                  updated_at: '2023-12-18T10:28:39.000000Z'
+                  created_at: '2023-12-18T10:28:39.000000Z'
+                  id: 15
+      tags:
+        - Transaction
+  /transaction/{transactionId}:
+    get:
+      summary: Get a transaction
+      description: get a transaction filter based on user logged in.
+      operationId: get a transaction
+      security:
+        - apiKey: null
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: transaction ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_get_transaction'
+              example:
+                message: Transaction detail
+                code: 200
+                results:
+                  id: 13
+                  transaction_name: test 1
+                  date: '2023-12-05 12:56:00'
+                  type: out
+                  remarks: test remarks
+                  amount: 30000
+                  account:
+                    id: 11
+                    name: Account 2
+                    description: lorem ipsum dolor
+                    balance: 840000
+      tags:
+        - Transaction
+    post:
+      summary: Update transaction
+      description: update a transaction filter based on user logged in.
+      operationId: update transaction
+      security:
+        - apiKey: null
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: transaction ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_name:
+                  type: string
+                  description: transaction name min 2 chars.
+                  example: Bank transaction
+                date:
+                  type: string
+                  description: transaction date.
+                  example: '2023-12-04 34:00:00'
+                amount:
+                  type: number
+                  description: transaction amount.
+                  example: 500000
+                remarks:
+                  type: string
+                  description: transaction description
+                  example: my saving transaction
+                type:
+                  type: string
+                  description: only accept these value `in` or `out`
+                  example: out
+                account_id:
+                  type: integer
+                  description: account source ID
+                  example: 11
+              required:
+                - transaction_name
+                - date
+                - amount
+                - type
+                - account_id
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_update_transaction'
+              example:
+                message: transaction updated successfully
+                code: 201
+                results:
+                  transaction_name: Beras
+                  date: '2023-12-11 19:55:00'
+                  type: out
+                  remarks: beras 5kg
+                  account_id: 11
+                  user_id: 11
+                  amount: 20000
+                  updated_at: '2023-12-18T10:28:39.000000Z'
+                  created_at: '2023-12-18T10:28:39.000000Z'
+                  id: 15
+      tags:
+        - Transaction
+    delete:
+      summary: Delete transaction
+      description: delete a transaction filter based on user logged in.
+      operationId: delete transaction
+      security:
+        - apiKey: null
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: transaction ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/abstract_delete_transaction'
+              example:
+                message: Transaction deleted
+                code: 200
+                results:
+                  id: 13
+                  user_id: 11
+                  account_id: 11
+                  transaction_name: test 1
+                  date: '2023-12-05 12:56:00'
+                  remarks: test remarks
+                  amount: 10000
+                  type: out
+                  created_at: '2023-12-12T06:29:41.000000Z'
+                  updated_at: '2023-12-18T11:05:32.000000Z'
+      tags:
+        - Transaction
 components:
   securitySchemes:
     apiKey:
@@ -212,3 +709,364 @@ components:
         message:
           type: string
           description: The response message.
+    abstract_all_accounts:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              user_id:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  email_verified_at:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+              name:
+                type: string
+              description:
+                type: string
+              balance:
+                type: number
+    abstract_create_account:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The user id
+            name:
+              type: string
+              description: The account name
+            description:
+              type: string
+              description: The account description
+            amount:
+              type: number
+              description: The account balance/amount
+            user_id:
+              type: integer
+              description: The user foreign id
+            created_at:
+              type: string
+              description: The account creation date
+            updated_at:
+              type: string
+              description: The account update date
+    abstract_get_account:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
+            balance:
+              type: number
+    abstract_update_account:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The user id
+            name:
+              type: string
+              description: The account name
+            description:
+              type: string
+              description: The account description
+            amount:
+              type: number
+              description: The account balance/amount
+            user_id:
+              type: integer
+              description: The user foreign id
+            created_at:
+              type: string
+              description: The account creation date
+            updated_at:
+              type: string
+              description: The account update date
+    abstract_delete_account:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+            user_id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
+            amount:
+              type: number
+    abstract_all_transactions_by_account:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
+            balance:
+              type: number
+            transactions:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  transaction_name:
+                    type: string
+                  date:
+                    type: string
+                  remarks:
+                    type: string
+                  amount:
+                    type: number
+                  account:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      balance:
+                        type: number
+    abstract_all_transactions:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              transaction_name:
+                type: string
+              date:
+                type: string
+              type:
+                type: string
+              remarks:
+                type: string
+              amount:
+                type: number
+              account:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  balance:
+                    type: number
+    abstract_create_transaction:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The user id
+            name:
+              type: string
+              description: The account name
+            description:
+              type: string
+              description: The account description
+            amount:
+              type: number
+              description: The account balance/amount
+            user_id:
+              type: integer
+              description: The user foreign id
+            created_at:
+              type: string
+              description: The account creation date
+            updated_at:
+              type: string
+              description: The account update date
+    abstract_get_transaction:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+            transaction_name:
+              type: string
+            date:
+              type: string
+            type:
+              type: string
+            remarks:
+              type: string
+            amount:
+              type: number
+            account:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                description:
+                  type: string
+                balance:
+                  type: number
+    abstract_update_transaction:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The user id
+            name:
+              type: string
+              description: The account name
+            description:
+              type: string
+              description: The account description
+            amount:
+              type: number
+              description: The account balance/amount
+            user_id:
+              type: integer
+              description: The user foreign id
+            created_at:
+              type: string
+              description: The account creation date
+            updated_at:
+              type: string
+              description: The account update date
+    abstract_delete_transaction:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The response message.
+        code:
+          type: integer
+          description: The HTTP response code.
+        results:
+          type: object
+          properties:
+            id:
+              type: integer
+            user_id:
+              type: integer
+            account_id:
+              type: integer
+            transaction_name:
+              type: string
+            date:
+              type: string
+            remarks:
+              type: string
+            amount:
+              type: number
+            type:
+              type: string
+            created_at:
+              type: string
+            updated_at:
+              type: string

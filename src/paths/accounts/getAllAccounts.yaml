@@ -1,7 +1,7 @@
 get:
   summary: Get all accounts
   description: get all accounts filter based on user logged in.
-  operationId: all account
+  operationId: all accounts
   security:
     - apiKey:
   responses:
@@ -10,14 +10,14 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../responses/schemas/abstract_all_accounts.yaml
+            $ref: ../responses/accounts/schemas/abstract_all_accounts.yaml
           example:
-            $ref: ../responses/example/allAccountsExample.yaml
+            $ref: ../responses/accounts/examples/allAccountsExample.yaml
   tags:
     - Account
 
 post:
-  summary: Create an accounts
+  summary: Create account
   description: create an account filter based on user logged in.
   operationId: create account
   security:
@@ -35,11 +35,11 @@ post:
               example: 'Bank Account'
             amount:
               type: number
-              description: amount/balance of account.
+              description: account amount/balance.
               example: 500000
             description:
               type: string
-              description: description of account
+              description: account description
               example: 'my saving account'
           required:
             - name
@@ -50,9 +50,9 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../responses/schemas/abstract_create_account.yaml
+            $ref: ../responses/accounts/schemas/abstract_create_account.yaml
           example:
-            $ref: ../responses/example/createAccountExample.yaml
+            $ref: ../responses/accounts/examples/createAccountExample.yaml
   tags:
     - Account
 

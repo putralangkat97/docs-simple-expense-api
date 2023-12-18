@@ -1,0 +1,32 @@
+type: object
+properties:
+  message:
+    type: string
+    description: The response message.
+  code:
+    type: integer
+    description: The HTTP response code.
+  results:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: The user id
+      name:
+        type: string
+        description: The account name
+      description:
+        type: string
+        description: The account description
+      amount:
+        type: number
+        description: The account balance/amount
+      user_id:
+        type: integer
+        description: The user foreign id
+      created_at:
+        type: string
+        description: The account creation date
+      updated_at:
+        type: string
+        description: The account update date

@@ -1,0 +1,13 @@
+message: transaction updated successfully
+code: 201
+results:
+  transaction_name: Beras
+  date: '2023-12-11 19:55:00'
+  type: out
+  remarks: beras 5kg
+  account_id: 11
+  user_id: 11
+  amount: 20000
+  updated_at: '2023-12-18T10:28:39.000000Z'
+  created_at: '2023-12-18T10:28:39.000000Z'
+  id: 15

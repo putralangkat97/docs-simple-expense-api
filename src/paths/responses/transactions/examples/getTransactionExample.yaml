@@ -1,0 +1,14 @@
+message: Transaction detail
+code: 200
+results:
+  id: 13
+  transaction_name: test 1
+  date: '2023-12-05 12:56:00'
+  type: out
+  remarks: test remarks
+  amount: 30000.000
+  account:
+    id: 11
+    name: Account 2
+    description: lorem ipsum dolor
+    balance: 840000.000

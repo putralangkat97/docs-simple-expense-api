@@ -1,0 +1,23 @@
+---
+  - id: 1
+    transaction_name: Transaction 1
+    date: "2023-12-12 23:56:32"
+    type: "out"
+    remarks: "dinner"
+    amount: 345.763
+    account:
+      id: 3
+      name: Account 2
+      description: lorem ipsum dolor
+      balance: 5499.344
+  - id: 2
+    transaction_name: Transaction 2
+    date: "2023-12-12 23:59:32"
+    type: "in"
+    remarks: "transfer from friend"
+    amount: 599.763
+    account:
+      id: 3
+      name: Account 2
+      description: lorem ipsum dolor
+      balance: 5499.344

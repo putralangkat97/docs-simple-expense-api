@@ -24,6 +24,7 @@ tags:
   - name: Authentication
     description: Application authentication
   - name: Account
+  - name: Transaction
 
 paths:
   /register:
@@ -36,9 +37,14 @@ paths:
   /account:
     $ref: './paths/accounts/getAllAccounts.yaml'
   /account/{accountId}:
-    $ref: './paths/accounts/getAnAccounts.yaml'
+    $ref: './paths/accounts/getAnAccount.yaml'
   /account/{accountId}/transaction:
     $ref: './paths/accounts/getAllTransactionsByAccount.yaml'
+
+  /transaction:
+    $ref: './paths/transactions/getAllTransactions.yaml'
+  /transaction/{transactionId}:
+    $ref: './paths/transactions/getATransaction.yaml'
 
 components:
   securitySchemes:
